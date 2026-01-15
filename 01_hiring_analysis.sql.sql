@@ -5,6 +5,7 @@
 -- -- Require 0–1 year experience
 -- -- Offer at least 6 LPA maximum salary
 
+<<<<<<< HEAD
 -- WITH filtered_jobs AS (
 --     SELECT
 --         company_name,
@@ -88,8 +89,25 @@ WITH eligible_location AS (
     FROM job_postings
 	WHERE experience_required <=1.0
     AND role_title LIKE '%data analyst%'
+=======
+WITH filtered_jobs AS (
+    SELECT
+        company_name,
+        role_title,
+        location,
+        min_salary_lpa,
+        max_salary_lpa,
+        work_mode
+    FROM job_postings
+    WHERE location IN ('Delhi NCR', 'Gurugram', 'Noida', 'Remote')
+      AND experience_required <= 1.0
+      AND max_salary_lpa >= 6.0
+>>>>>>> 87417c1a9de18d952bdc88c12611676f38045465
 )
+SELECT *
+FROM filtered_jobs;
 
+<<<<<<< HEAD
 SELECT * FROM eligible_location
 -- SELECT standardize_location, 
 -- 	   COUNT(DISTINCT company_name) AS no_of_companies 
@@ -122,3 +140,24 @@ SELECT * FROM eligible_location
 
 
 
+=======
+
+-- 👉 Show the number of eligible Data Analyst roles per company
+-- that satisfy:
+
+-- Location: Delhi / Gurugram / Noida / NCR / Remote
+-- Experience required: ≤ 1 year
+-- Max salary: ≥ 6 LPA
+-- Expected output columns:
+-- company_name | total_roles
+
+
+WITH company_roles AS (
+    SELECT company_name , COUNT(role_title) AS total_roles FROM job_postings
+    WHERE location IN ('Delhi NCR', 'Gurugram', 'Noida')
+    AND experience_required <= 1.0
+    AND max_salary_lpa >= 6.0
+    GROUP BY company_name
+)
+SELECT * FROM company_roles;
+>>>>>>> 87417c1a9de18d952bdc88c12611676f38045465
