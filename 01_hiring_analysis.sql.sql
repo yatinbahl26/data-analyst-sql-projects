@@ -5,7 +5,6 @@
 -- -- Require 0–1 year experience
 -- -- Offer at least 6 LPA maximum salary
 
-<<<<<<< HEAD
 -- WITH filtered_jobs AS (
 --     SELECT
 --         company_name,
@@ -21,7 +20,7 @@
 -- )
 -- SELECT *
 -- FROM filtered_jobs;
-=======
+
 WITH filtered_jobs AS (
     SELECT
         company_name,
@@ -37,7 +36,6 @@ WITH filtered_jobs AS (
 )
 SELECT *
 FROM filtered_jobs;
->>>>>>> de1eebd7fab7fb477c2c0572235a7d2a60c2eeab
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- -------------------------------------------------------------------------------------------------------------------------------------------
@@ -98,8 +96,6 @@ GROUP BY standardized_location;
 -- Order results by company count (descending)
 
 
-<<<<<<< HEAD
-=======
 WITH eligible_location AS (
 	SELECT 
     company_name,
@@ -128,7 +124,6 @@ ORDER BY no_of_companies DESC;
 -- Data cleaning (location standardization)
 -- Aggregation (COUNT DISTINCT)
 
->>>>>>> de1eebd7fab7fb477c2c0572235a7d2a60c2eeab
 -- WITH eligible_location AS (
 -- 	SELECT 
 --     company_name,
@@ -165,7 +160,6 @@ ORDER BY no_of_companies DESC;
 -- standardized location
 -- salary column(s)
 
-<<<<<<< HEAD
 WITH eligible_roles AS (
 	SELECT min_salary_lpa,
     COUNT(*) AS no_of_roles,
@@ -185,8 +179,4 @@ AVG(min_salary_lpa) AS avg_min_salary_lpa,
 COUNT(*) as total_roles
 FROM eligible_roles
 GROUP BY standardized_location
-ORDER BY avg_min_salary_lpa DESC
-
-
-=======
->>>>>>> de1eebd7fab7fb477c2c0572235a7d2a60c2eeab
+ORDER BY avg_min_salary_lpa DESC;
