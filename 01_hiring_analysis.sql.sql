@@ -5,7 +5,6 @@
 -- -- Require 0–1 year experience
 -- -- Offer at least 6 LPA maximum salary
 
-<<<<<<< HEAD
 -- WITH filtered_jobs AS (
 --     SELECT
 --         company_name,
@@ -21,23 +20,6 @@
 -- )
 -- SELECT *
 -- FROM filtered_jobs;
-=======
-WITH filtered_jobs AS (
-    SELECT
-        company_name,
-        role_title,
-        location,
-        min_salary_lpa,
-        max_salary_lpa,
-        work_mode
-    FROM job_postings
-    WHERE location IN ('Delhi NCR', 'Gurugram', 'Noida', 'Remote')
-      AND experience_required <= 1.0
-      AND max_salary_lpa >= 6.0
-)
-SELECT *
-FROM filtered_jobs;
->>>>>>> de1eebd7fab7fb477c2c0572235a7d2a60c2eeab
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- -------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,35 +34,35 @@ FROM filtered_jobs;
 -- company_name | total_roles
 
 
-WITH company_roles AS (
-    SELECT company_name , COUNT(role_title) AS total_roles FROM job_postings
-    WHERE location IN ('Delhi NCR', 'Gurugram', 'Noida')
-    AND experience_required <= 1.0
-    AND max_salary_lpa >= 6.0
-    GROUP BY company_name
-)
-SELECT * FROM company_roles;
+-- WITH company_roles AS (
+--     SELECT company_name , COUNT(role_title) AS total_roles FROM job_postings
+--     WHERE location IN ('Delhi NCR', 'Gurugram', 'Noida')
+--     AND experience_required <= 1.0
+--     AND max_salary_lpa >= 6.0
+--     GROUP BY company_name
+-- )
+-- SELECT * FROM company_roles;
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 
-WITH eligible_roles AS (
-    SELECT
-        job_id,
-        role_title,
-        CASE
-            WHEN location IN ('Gurgaon', 'Gurugram') THEN 'Gurugram'
-            WHEN location IN ('Delhi', 'Delhi NCR', 'NCR') THEN 'Delhi NCR'
-            WHEN location  = 'Noida' THEN 'Noida'
-            WHEN location  IN ('Remote', 'WFH') THEN 'Remote'
-            ELSE 'Other'
-        END AS standardized_location
-    FROM job_postings
-    WHERE experience_required <= 1
-)
-SELECT standardized_location, COUNT(*)
-FROM eligible_roles
-GROUP BY standardized_location;
+-- WITH eligible_roles AS (
+--     SELECT
+--         job_id,
+--         role_title,
+--         CASE
+--             WHEN location IN ('Gurgaon', 'Gurugram') THEN 'Gurugram'
+--             WHEN location IN ('Delhi', 'Delhi NCR', 'NCR') THEN 'Delhi NCR'
+--             WHEN location  = 'Noida' THEN 'Noida'
+--             WHEN location  IN ('Remote', 'WFH') THEN 'Remote'
+--             ELSE 'Other'
+--         END AS standardized_location
+--     FROM job_postings
+--     WHERE experience_required <= 1
+-- )
+-- SELECT standardized_location, COUNT(*)
+-- FROM eligible_roles
+-- GROUP BY standardized_location;
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- -------------------------------------------------------------------------------------------------------------------------------------------
@@ -98,37 +80,6 @@ GROUP BY standardized_location;
 -- Order results by company count (descending)
 
 
-<<<<<<< HEAD
-=======
-WITH eligible_location AS (
-	SELECT 
-    company_name,
-	CASE
-		WHEN location IN ('Gurugram', 'Gurgaon') THEN 'Gurugram'
-        WHEN location IN ('Delhi NCR', 'NCR', 'Delhi') THEN 'Delhi'
-        WHEN location = 'Noida' THEN 'Noida'
-        WHEN location IN ('Remote' ,'WFH') THEN 'Remote'
-        ELSE 'Other'
-	END AS standardize_location
-    FROM job_postings
-	WHERE experience_required <=1.0
-    AND role_title LIKE '%data analyst%'
-)
-SELECT standardize_location, 
-	   COUNT(DISTINCT company_name) AS no_of_companies 
-FROM eligible_location
-GROUP BY standardize_location
-ORDER BY no_of_companies DESC;
-
-
-
-
--- CTE prepares clean data; main query aggregates.
--- -- Here we are :
--- Data cleaning (location standardization)
--- Aggregation (COUNT DISTINCT)
-
->>>>>>> de1eebd7fab7fb477c2c0572235a7d2a60c2eeab
 -- WITH eligible_location AS (
 -- 	SELECT 
 --     company_name,
@@ -165,10 +116,8 @@ ORDER BY no_of_companies DESC;
 -- standardized location
 -- salary column(s)
 
-<<<<<<< HEAD
 WITH eligible_roles AS (
 	SELECT min_salary_lpa,
-    COUNT(*) AS no_of_roles,
     CASE
 		WHEN location IN ('Gurugram', 'Gurgaon') THEN 'Gurugram'
         WHEN location IN ('NCR', 'Delhi NCR', 'Delhi') THEN 'Delhi NCR'
@@ -188,5 +137,3 @@ GROUP BY standardized_location
 ORDER BY avg_min_salary_lpa DESC
 
 
-=======
->>>>>>> de1eebd7fab7fb477c2c0572235a7d2a60c2eeab
