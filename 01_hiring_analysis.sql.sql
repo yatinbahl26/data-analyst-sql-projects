@@ -20,8 +20,6 @@
 -- )
 -- SELECT *
 -- FROM filtered_jobs;
-<<<<<<< HEAD
-=======
 
 WITH filtered_jobs AS (
     SELECT
@@ -38,7 +36,6 @@ WITH filtered_jobs AS (
 )
 SELECT *
 FROM filtered_jobs;
->>>>>>> 42461a4ef1d9295fd37b9284d944e2d4243dbcc6
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- -------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,8 +96,6 @@ FROM filtered_jobs;
 -- Order results by company count (descending)
 
 
-<<<<<<< HEAD
-=======
 WITH eligible_location AS (
 	SELECT 
     company_name,
@@ -129,7 +124,6 @@ ORDER BY no_of_companies DESC;
 -- Data cleaning (location standardization)
 -- Aggregation (COUNT DISTINCT)
 
->>>>>>> 42461a4ef1d9295fd37b9284d944e2d4243dbcc6
 -- WITH eligible_location AS (
 -- 	SELECT 
 --     company_name,
@@ -184,10 +178,4 @@ AVG(min_salary_lpa) AS avg_min_salary_lpa,
 COUNT(*) as total_roles
 FROM eligible_roles
 GROUP BY standardized_location
-<<<<<<< HEAD
 ORDER BY avg_min_salary_lpa DESC
-
-
-=======
-ORDER BY avg_min_salary_lpa DESC;
->>>>>>> 42461a4ef1d9295fd37b9284d944e2d4243dbcc6
