@@ -20,6 +20,25 @@
 -- )
 -- SELECT *
 -- FROM filtered_jobs;
+<<<<<<< HEAD
+=======
+
+WITH filtered_jobs AS (
+    SELECT
+        company_name,
+        role_title,
+        location,
+        min_salary_lpa,
+        max_salary_lpa,
+        work_mode
+    FROM job_postings
+    WHERE location IN ('Delhi NCR', 'Gurugram', 'Noida', 'Remote')
+      AND experience_required <= 1.0
+      AND max_salary_lpa >= 6.0
+)
+SELECT *
+FROM filtered_jobs;
+>>>>>>> 42461a4ef1d9295fd37b9284d944e2d4243dbcc6
 
 -- -------------------------------------------------------------------------------------------------------------------------------------------
 -- -------------------------------------------------------------------------------------------------------------------------------------------
@@ -80,6 +99,37 @@
 -- Order results by company count (descending)
 
 
+<<<<<<< HEAD
+=======
+WITH eligible_location AS (
+	SELECT 
+    company_name,
+	CASE
+		WHEN location IN ('Gurugram', 'Gurgaon') THEN 'Gurugram'
+        WHEN location IN ('Delhi NCR', 'NCR', 'Delhi') THEN 'Delhi'
+        WHEN location = 'Noida' THEN 'Noida'
+        WHEN location IN ('Remote' ,'WFH') THEN 'Remote'
+        ELSE 'Other'
+	END AS standardize_location
+    FROM job_postings
+	WHERE experience_required <=1.0
+    AND role_title LIKE '%data analyst%'
+)
+SELECT standardize_location, 
+	   COUNT(DISTINCT company_name) AS no_of_companies 
+FROM eligible_location
+GROUP BY standardize_location
+ORDER BY no_of_companies DESC;
+
+
+
+
+-- CTE prepares clean data; main query aggregates.
+-- -- Here we are :
+-- Data cleaning (location standardization)
+-- Aggregation (COUNT DISTINCT)
+
+>>>>>>> 42461a4ef1d9295fd37b9284d944e2d4243dbcc6
 -- WITH eligible_location AS (
 -- 	SELECT 
 --     company_name,
@@ -134,6 +184,10 @@ AVG(min_salary_lpa) AS avg_min_salary_lpa,
 COUNT(*) as total_roles
 FROM eligible_roles
 GROUP BY standardized_location
+<<<<<<< HEAD
 ORDER BY avg_min_salary_lpa DESC
 
 
+=======
+ORDER BY avg_min_salary_lpa DESC;
+>>>>>>> 42461a4ef1d9295fd37b9284d944e2d4243dbcc6
